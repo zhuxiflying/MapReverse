@@ -1,0 +1,7 @@
+.icon-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 80px);
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
+  padding: 5px;
+}
