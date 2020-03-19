@@ -1,7 +1,22 @@
 .icon-container {
+  /*border style*/
+  border-color: #ccc;
+  border-width: 1px;
+  /* border-radius: 10px; */
+  border-style: solid;
+
+  /*position*/
+  grid-column-start: 1;
+  grid-column-end: 6;
+  grid-row-start: 1;
+  grid-row-end: 7;
+
+  overflow: auto;
+
+  /*nested grid layout*/
   display: grid;
   grid-template-columns: repeat(auto-fill, 80px);
-  grid-column-gap: 5px;
-  grid-row-gap: 5px;
-  padding: 5px;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  padding: 10px;
 }

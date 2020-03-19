@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import MapIconContainer from "./component/mapIconContainer";
+import "./css/app.css";
 
 class App extends Component {
   state = {
@@ -13,8 +14,11 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.data);
-    return <MapIconContainer key="container" data={this.state.data} />;
+    return (
+      <div className="grid-container">
+        <MapIconContainer key="inconContainer" data={this.state.data} />
+      </div>
+    );
   }
 }
 
