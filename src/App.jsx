@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import MapIconContainer from "./component/mapIconContainer";
+import TimeBarChart from "./component/timeBarChart";
 import "./css/app.css";
 
 class App extends Component {
@@ -17,6 +18,7 @@ class App extends Component {
     return (
       <div className="grid-container">
         <MapIconContainer key="inconContainer" data={this.state.data} />
+        <TimeBarChart key="timeBarChart" data={this.state.data} />
       </div>
     );
   }
