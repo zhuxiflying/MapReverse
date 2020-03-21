@@ -4,9 +4,8 @@ export function aggregateBymonth(data) {
   let aggregation = {};
 
   data.forEach(element => {
-    const { Crawl_Date: crawlDate } = element;
-
-    const date = new Date(crawlDate),
+    const { Crawl_Date } = element;
+    const date = new Date(Crawl_Date),
       month = date.getMonth() + 1,
       key = date.getFullYear() + "-" + month;
 
@@ -15,11 +14,18 @@ export function aggregateBymonth(data) {
     }
     monthCount[key]++;
   });
-
   aggregation = Object.entries(monthCount).map(([key, value]) => ({
     date: key,
     frequency: value
   }));
 
   return aggregation;
+}
+
+//format tick label, only return month for date that is not in Jananary
+export function tickFormatter(tick) {
+  const date = new Date(tick);
+  const month = date.getMonth() + 1;
+  if (month === 1) return tick;
+  return month;
 }
