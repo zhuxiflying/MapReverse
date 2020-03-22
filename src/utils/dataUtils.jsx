@@ -1,3 +1,5 @@
+// import { scaleLinear } from "d3-scale";
+
 // aggregte data by crawl date with monthly intervals
 export function aggregateBymonth(data) {
   const monthCount = {};
@@ -28,4 +30,10 @@ export function tickFormatter(tick) {
   const month = date.getMonth() + 1;
   if (month === 1) return tick;
   return month;
+}
+
+export function getDataDomain(data) {
+  // const range = ["#eff3ff", "#bdd7e7", "#6baed6", "#3182bd", "#08519c"];
+  const scores = data.map(item => item.Score).sort();
+  return scores;
 }
