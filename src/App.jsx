@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import MapIconContainer from "./component/mapIconContainer";
 import TimeBarChart from "./component/timeBarChart";
+import { initColorScale } from "./utils/dataUtils";
 import "./css/app.css";
 
 class App extends Component {
@@ -36,14 +37,22 @@ class App extends Component {
     const filtered =
       selectedBar === "" ? data : this.filterDataByDate(data, selectedBar);
 
+    //initialize colorScale
+    const quantileScale = initColorScale(data);
+
     return (
       <div className="grid-container">
-        <MapIconContainer key="iconContainer" data={filtered} />
+        <MapIconContainer
+          key="iconContainer"
+          data={filtered}
+          scale={quantileScale}
+        />
         <TimeBarChart
           key="timeBarChart"
           data={data}
           selectedBar={selectedBar}
           onClickBar={this.handleBarClick}
+          scale={quantileScale}
         />
       </div>
     );

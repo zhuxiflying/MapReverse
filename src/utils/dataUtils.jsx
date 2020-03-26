@@ -1,12 +1,13 @@
-// import { scaleLinear } from "d3-scale";
+import { scaleQuantile } from "d3-scale";
 
 // aggregte data by crawl date with monthly intervals
 export function aggregateBymonth(data) {
-  const monthCount = {};
+  let monthCount = {};
+  let monthScore = {};
   let aggregation = {};
 
   data.forEach(element => {
-    const { Crawl_Date } = element;
+    const { Crawl_Date, Score } = element;
     const date = new Date(Crawl_Date),
       month = date.getMonth() + 1,
       key = date.getFullYear() + "-" + month;
@@ -15,10 +16,16 @@ export function aggregateBymonth(data) {
       monthCount[key] = 1;
     }
     monthCount[key]++;
+
+    if (!monthScore[key]) {
+      monthScore[key] = Score;
+    }
+    monthScore[key] += Score;
   });
   aggregation = Object.entries(monthCount).map(([key, value]) => ({
     date: key,
-    frequency: value
+    frequency: value,
+    score: monthScore[key] / value
   }));
 
   return aggregation;
@@ -32,8 +39,12 @@ export function tickFormatter(tick) {
   return month;
 }
 
-export function getDataDomain(data) {
-  // const range = ["#eff3ff", "#bdd7e7", "#6baed6", "#3182bd", "#08519c"];
-  const scores = data.map(item => item.Score).sort();
-  return scores;
+//initial color scale
+export function initColorScale(data) {
+  const domain = data.map(item => item.Score).sort();
+  const range = ["#feebe2", "#fbb4b9", "#f768a1", "#ae017e"];
+  const quantileScale = scaleQuantile()
+    .domain(domain)
+    .range(range);
+  return quantileScale;
 }
