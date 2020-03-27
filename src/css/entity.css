@@ -1,0 +1,13 @@
+.entity-div {
+  border-radius: 15px;
+  display: inline-block;
+  font-family: "Times New Roman", Times, serif;
+  color: #f7f7f7;
+  padding: 5px;
+  margin: 2px;
+}
+
+.entity-div:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}

@@ -1,0 +1,23 @@
+.entity-container {
+  /*border style*/
+  border-color: #ccc;
+  border-width: 1px;
+  border-style: solid;
+
+  /*position*/
+  grid-column-start: 7;
+  grid-column-end: 11;
+  grid-row-start: 7;
+  grid-row-end: 11;
+
+  overflow: auto;
+  padding: 10px;
+
+  /*nested flex layout*/
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+
+  padding: 10px;
+}
