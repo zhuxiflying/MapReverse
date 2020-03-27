@@ -9,7 +9,8 @@ import "./css/app.css";
 class App extends Component {
   state = {
     data: [],
-    selectedBar: ""
+    selectedBar: "",
+    selectedEntity: []
   };
 
   async componentDidMount() {
@@ -19,6 +20,17 @@ class App extends Component {
 
   handleBarClick = bar => {
     this.setState({ selectedBar: bar.date });
+  };
+
+  bandleEntityClick = entity => {
+    const selectedEntity = [...this.state.selectedEntity];
+    const index = selectedEntity.indexOf(entity);
+    if (index > -1) {
+      selectedEntity.splice(index, 1);
+    } else {
+      selectedEntity.push(entity);
+    }
+    this.setState({ selectedEntity });
   };
 
   filterDataByDate = (maps, barDate) => {
@@ -33,7 +45,7 @@ class App extends Component {
   };
 
   render() {
-    const { data, selectedBar } = this.state;
+    const { data, selectedBar, selectedEntity } = this.state;
 
     const filtered =
       selectedBar === "" ? data : this.filterDataByDate(data, selectedBar);
@@ -54,7 +66,12 @@ class App extends Component {
           onClickBar={this.handleBarClick}
           scale={quantileScale}
         />
-        <EntityContainer key="entityContainer" data={data} />
+        <EntityContainer
+          key="entityContainer"
+          data={data}
+          selectedEntity={selectedEntity}
+          onClickEntity={this.bandleEntityClick}
+        />
       </div>
     );
   }

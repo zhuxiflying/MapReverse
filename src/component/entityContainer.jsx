@@ -3,14 +3,21 @@ import { aggregateByEntity, initNaturalBreak } from "../utils/dataUtils";
 import Entity from "./entity";
 import "../css/entityContainer.css";
 
-const EntityContainer = ({ data }) => {
+const EntityContainer = ({ data, onClickEntity, selectedEntity }) => {
   const entities = aggregateByEntity(data);
   const scale = initNaturalBreak(entities);
+  // console.log(selectedEntity);
 
   return (
     <div className="entity-container">
       {entities.map(entity => (
-        <Entity key={entity.key} entity={entity} scale={scale} />
+        <Entity
+          key={entity.key}
+          entity={entity}
+          scale={scale}
+          onClickEntity={onClickEntity}
+          selected={selectedEntity.includes(entity.key)}
+        />
       ))}
     </div>
   );
