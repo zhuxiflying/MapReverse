@@ -28,7 +28,6 @@ export function aggregateByEntity(data) {
 
   //sort the entity with frequency
   entityList.sort((a, b) => b.frequency - a.frequency);
-
   return entityList;
 }
 
@@ -40,10 +39,8 @@ export function aggregateBymonth(data) {
 
   data.forEach(element => {
     const { Crawl_Date, Score } = element;
-    const date = new Date(Crawl_Date),
-      month = date.getMonth() + 1,
-      key = date.getFullYear() + "-" + month;
-
+    const key = getKeyfromDate(Crawl_Date);
+    //use object as hash map
     if (!monthCount[key]) {
       monthCount[key] = 1;
     }
@@ -71,6 +68,13 @@ export function tickFormatter(tick) {
   return month;
 }
 
+//extract the year and month fields as the key for a date
+export function getKeyfromDate(dateStr) {
+  const date = new Date(dateStr),
+    month = date.getMonth() + 1;
+  return date.getFullYear() + "-" + month;
+}
+
 //initial color scale
 export function initQuantileScale(data) {
   const domain = data.map(item => item.Score).sort((a, b) => a - b);
@@ -86,7 +90,8 @@ export function initNaturalBreak(data) {
   if (data.length === 0) return null;
   const range = ["#fecc5c", "#fd8d3c", "#f03b20", "#bd0026"];
   const domain = data.map(item => item.frequency);
-  const domainClass = ckmeans(domain, range.length - 1);
+  //implment jenks natural breaks by ckmeans, #clusters = #thresholds +1;
+  const domainClass = ckmeans(domain, range.length);
   const thresholds = domainClass
     .map(element => {
       return Math.max(...element);

@@ -16,7 +16,7 @@ const EntityContainer = ({ data, onClickEntity, selectedEntity }) => {
           entity={entity}
           scale={scale}
           onClickEntity={onClickEntity}
-          selected={selectedEntity.includes(entity.key)}
+          selected={selectedEntity === entity.key}
         />
       ))}
     </div>

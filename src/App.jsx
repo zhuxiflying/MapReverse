@@ -3,14 +3,14 @@ import axios from "axios";
 import MapIconContainer from "./component/mapIconContainer";
 import TimeBarChart from "./component/timeBarChart";
 import EntityContainer from "./component/entityContainer";
-import { initQuantileScale } from "./utils/dataUtils";
+import { initQuantileScale, getKeyfromDate } from "./utils/dataUtils";
 import "./css/app.css";
 
 class App extends Component {
   state = {
     data: [],
     selectedBar: "",
-    selectedEntity: []
+    selectedEntity: ""
   };
 
   async componentDidMount() {
@@ -19,29 +19,31 @@ class App extends Component {
   }
 
   handleBarClick = bar => {
-    this.setState({ selectedBar: bar.date });
+    const selectedBar = this.state.selectedBar === bar.date ? "" : bar.date;
+    this.setState({ selectedBar });
   };
 
   bandleEntityClick = entity => {
-    const selectedEntity = [...this.state.selectedEntity];
-    const index = selectedEntity.indexOf(entity);
-    if (index > -1) {
-      selectedEntity.splice(index, 1);
-    } else {
-      selectedEntity.push(entity);
-    }
+    const selectedEntity = entity === this.state.selectedEntity ? "" : entity;
     this.setState({ selectedEntity });
   };
 
   filterDataByDate = (maps, barDate) => {
-    const filteredMap = maps.filter(element => {
+    const filtered = maps.filter(element => {
       const { Crawl_Date } = element;
-      const date2 = new Date(Crawl_Date),
-        month = date2.getMonth() + 1,
-        key = date2.getFullYear() + "-" + month;
+      const key = getKeyfromDate(Crawl_Date);
       return key === barDate;
     });
-    return filteredMap;
+    return filtered;
+  };
+
+  filterDataByEntity = (maps, entity) => {
+    const filtered = maps.filter(element => {
+      const entities = element.entity;
+      const entityKeys = entities === null ? [] : Object.keys(entities);
+      return entityKeys.includes(entity);
+    });
+    return filtered;
   };
 
   render() {
@@ -50,13 +52,18 @@ class App extends Component {
     const filtered =
       selectedBar === "" ? data : this.filterDataByDate(data, selectedBar);
 
+    const filtered2 =
+      selectedEntity === ""
+        ? filtered
+        : this.filterDataByEntity(filtered, selectedEntity);
+
     const quantileScale = initQuantileScale(data);
 
     return (
       <div className="grid-container">
         <MapIconContainer
           key="iconContainer"
-          data={filtered}
+          data={filtered2}
           scale={quantileScale}
         />
         <TimeBarChart
