@@ -34,30 +34,58 @@ export function aggregateByEntity(data) {
 // aggregte data by crawl date with monthly intervals
 export function aggregateBymonth(data) {
   let monthCount = {};
-  let monthScore = {};
-  let aggregation = {};
+  let aggregation = [];
 
   data.forEach(element => {
     const { Crawl_Date, Score } = element;
     const key = getKeyfromDate(Crawl_Date);
-    //use object as hash map
+    //use object as hash map, the value cantains frequency and total scores;
     if (!monthCount[key]) {
-      monthCount[key] = 1;
+      monthCount[key] = [];
+      monthCount[key][0] = 1;
+      monthCount[key][1] = Score;
+    } else {
+      monthCount[key][0]++;
+      monthCount[key][1] += Score;
     }
-    monthCount[key]++;
-
-    if (!monthScore[key]) {
-      monthScore[key] = Score;
-    }
-    monthScore[key] += Score;
   });
+
   aggregation = Object.entries(monthCount).map(([key, value]) => ({
     date: key,
-    frequency: value,
-    score: monthScore[key] / value
+    frequency: value[0],
+    score: value[1] / value[0]
   }));
 
   return aggregation;
+}
+
+export function scoreHistogram(data) {
+  const interval = 2;
+  const barNum = 50;
+
+  let foo = [];
+  for (var i = 1; i <= barNum; i++) {
+    foo.push(i);
+  }
+
+  let histogram = {};
+  let histogramChart = [];
+  data.forEach(element => {
+    const { Score } = element;
+    const key = Math.ceil(Score / interval);
+    if (!histogram[key]) {
+      histogram[key] = 1;
+    } else {
+      histogram[key]++;
+    }
+  });
+
+  histogramChart = foo.map(element => ({
+    label: element * interval,
+    frequency: histogram[element] || 0
+  }));
+
+  return histogramChart;
 }
 
 //format tick label, only return month for date that is not in Jananary

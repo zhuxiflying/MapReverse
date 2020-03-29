@@ -5,6 +5,7 @@ import TimeBarChart from "./component/timeBarChart";
 import EntityContainer from "./component/entityContainer";
 import { initQuantileScale, getKeyfromDate } from "./utils/dataUtils";
 import "./css/app.css";
+import ScoreFilter from "./component/scoreFilter";
 
 class App extends Component {
   state = {
@@ -66,6 +67,8 @@ class App extends Component {
           data={filtered2}
           scale={quantileScale}
         />
+        <ScoreFilter data={data} scale={quantileScale} />
+
         <TimeBarChart
           key="timeBarChart"
           data={data}
