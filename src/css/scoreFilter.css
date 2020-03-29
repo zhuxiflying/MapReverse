@@ -1,0 +1,14 @@
+.scoreFilter-container {
+  /*border style*/
+  border-color: #ccc;
+  border-width: 1px;
+  border-style: solid;
+
+  /*position*/
+  grid-column-start: 1;
+  grid-column-end: 7;
+  grid-row-start: 7;
+  grid-row-end: 9;
+
+  padding: 10px;
+}
