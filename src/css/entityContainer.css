@@ -1,17 +1,10 @@
 .entity-container {
-  /*border style*/
-  border-color: #ccc;
-  border-width: 1px;
-  border-style: solid;
+  width: calc(100%-20px);
+  height: calc(100%-20px);
 
-  /*position*/
-  grid-column-start: 7;
-  grid-column-end: 11;
-  grid-row-start: 7;
-  grid-row-end: 11;
-
-  overflow: auto;
+  /*grant margin to avoid entity hover distort bounding box*/
   padding: 10px;
+  /* margin: 10px; */
 
   /*nested flex layout*/
   display: flex;
@@ -19,6 +12,4 @@
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-content: flex-start;
-
-  padding: 10px;
 }

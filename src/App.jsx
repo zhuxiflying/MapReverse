@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import axios from "axios";
 import MapIconContainer from "./component/mapIconContainer";
 import TimeBarChart from "./component/timeBarChart";
-import EntityContainer from "./component/entityContainer";
+// import EntityContainer from "./component/entityContainer";
 import { initQuantileScale, getKeyfromDate } from "./utils/dataUtils";
 import "./css/app.css";
 import ScoreFilter from "./component/scoreFilter";
+import AnalysisTab from "./component/analysisTab";
 
 class App extends Component {
   state = {
@@ -80,34 +81,39 @@ class App extends Component {
 
     return (
       <div className="grid-container">
-        <MapIconContainer
-          key="iconContainer"
-          data={filtered3}
-          colorScale={quantileScale}
-        />
-
-        <ScoreFilter
-          key="scoreFilter"
-          data={data}
-          scoresRange={scoresRange}
-          colorScale={quantileScale}
-          handleChange={this.handleSilderChange}
-        />
-
-        <TimeBarChart
-          key="timeBarChart"
-          data={data}
-          selectedBar={selectedBar}
-          colorScale={quantileScale}
-          onClickBar={this.handleBarClick}
-        />
-
-        <EntityContainer
-          key="entityContainer"
-          data={filtered2}
-          selectedEntity={selectedEntity}
-          onClickEntity={this.handleEntityClick}
-        />
+        <div className="mapContainer">
+          <MapIconContainer
+            key="iconContainer"
+            data={filtered3}
+            colorScale={quantileScale}
+          />
+        </div>
+        <div className="scoreFilter">
+          <ScoreFilter
+            key="scoreFilter"
+            data={data}
+            scoresRange={scoresRange}
+            colorScale={quantileScale}
+            handleChange={this.handleSilderChange}
+          />
+        </div>
+        <div className="timeChart">
+          <TimeBarChart
+            key="timeBarChart"
+            data={data}
+            selectedBar={selectedBar}
+            colorScale={quantileScale}
+            onClickBar={this.handleBarClick}
+          />
+        </div>
+        <div className="analysisTab">
+          <AnalysisTab
+            key="analysisTab"
+            data={filtered2}
+            selectedEntity={selectedEntity}
+            onClickEntity={this.handleEntityClick}
+          />
+        </div>
       </div>
     );
   }
