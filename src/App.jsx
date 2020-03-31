@@ -62,11 +62,15 @@ class App extends Component {
 
   render() {
     const { data, scoresRange, selectedBar, selectedEntity } = this.state;
+
+    //filter data by date;
     const filtered =
       selectedBar === "" ? data : this.filterDataByDate(data, selectedBar);
 
+    //filter data by score range;
     const filtered2 = this.filterDataByScore(filtered, scoresRange);
 
+    //filter data by entity;
     const filtered3 =
       selectedEntity === ""
         ? filtered2
@@ -81,10 +85,12 @@ class App extends Component {
           data={filtered3}
           scale={quantileScale}
         />
+
         <ScoreFilter
+          key="scoreFilter"
           data={data}
-          colorScale={quantileScale}
           scoresRange={scoresRange}
+          colorScale={quantileScale}
           handleChange={this.handleSilderChange}
         />
 
@@ -92,9 +98,10 @@ class App extends Component {
           key="timeBarChart"
           data={data}
           selectedBar={selectedBar}
-          onClickBar={this.handleBarClick}
           colorScale={quantileScale}
+          onClickBar={this.handleBarClick}
         />
+
         <EntityContainer
           key="entityContainer"
           data={filtered2}

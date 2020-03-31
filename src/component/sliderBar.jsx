@@ -6,7 +6,6 @@ import "../css/sliderBar.css";
 
 const SliderBar = props => {
   const { scoresRange, handleChange } = props;
-  console.log(scoresRange);
 
   return (
     <Slider
