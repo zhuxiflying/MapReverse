@@ -11,7 +11,8 @@ class App extends Component {
   state = {
     data: [],
     selectedBar: "",
-    selectedEntity: ""
+    selectedEntity: "",
+    scoresRange: [0, 100]
   };
 
   async componentDidMount() {
@@ -24,9 +25,13 @@ class App extends Component {
     this.setState({ selectedBar });
   };
 
-  bandleEntityClick = entity => {
+  handleEntityClick = entity => {
     const selectedEntity = entity === this.state.selectedEntity ? "" : entity;
     this.setState({ selectedEntity });
+  };
+
+  handleSilderChange = scoresRange => {
+    this.setState({ scoresRange });
   };
 
   filterDataByDate = (maps, barDate) => {
@@ -47,16 +52,25 @@ class App extends Component {
     return filtered;
   };
 
-  render() {
-    const { data, selectedBar, selectedEntity } = this.state;
+  filterDataByScore = (maps, scoresRange) => {
+    const filtered = maps.filter(element => {
+      const score = element.Score;
+      return score >= scoresRange[0] && score <= scoresRange[1];
+    });
+    return filtered;
+  };
 
+  render() {
+    const { data, scoresRange, selectedBar, selectedEntity } = this.state;
     const filtered =
       selectedBar === "" ? data : this.filterDataByDate(data, selectedBar);
 
-    const filtered2 =
+    const filtered2 = this.filterDataByScore(filtered, scoresRange);
+
+    const filtered3 =
       selectedEntity === ""
-        ? filtered
-        : this.filterDataByEntity(filtered, selectedEntity);
+        ? filtered2
+        : this.filterDataByEntity(filtered2, selectedEntity);
 
     const quantileScale = initQuantileScale(data);
 
@@ -64,23 +78,28 @@ class App extends Component {
       <div className="grid-container">
         <MapIconContainer
           key="iconContainer"
-          data={filtered2}
+          data={filtered3}
           scale={quantileScale}
         />
-        <ScoreFilter data={data} scale={quantileScale} />
+        <ScoreFilter
+          data={data}
+          colorScale={quantileScale}
+          scoresRange={scoresRange}
+          handleChange={this.handleSilderChange}
+        />
 
         <TimeBarChart
           key="timeBarChart"
           data={data}
           selectedBar={selectedBar}
           onClickBar={this.handleBarClick}
-          scale={quantileScale}
+          colorScale={quantileScale}
         />
         <EntityContainer
           key="entityContainer"
-          data={data}
+          data={filtered2}
           selectedEntity={selectedEntity}
-          onClickEntity={this.bandleEntityClick}
+          onClickEntity={this.handleEntityClick}
         />
       </div>
     );

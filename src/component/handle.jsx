@@ -16,7 +16,6 @@ export function Handle({ handle: { id, value, percent }, getHandleProps }) {
         cursor: "pointer",
         borderRadius: "50%",
         backgroundColor: "#636363"
-        // borderColor: "#ddd"
       }}
       {...getHandleProps(id)}
     >

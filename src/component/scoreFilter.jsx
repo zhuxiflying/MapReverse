@@ -5,7 +5,7 @@ import { scoreHistogram } from "../utils/dataUtils";
 import "../css/scoreFilter.css";
 
 const ScoreFilter = props => {
-  const { data, scale } = props;
+  const { data, scoresRange, colorScale, handleChange } = props;
   const histogram = scoreHistogram(data);
 
   return (
@@ -18,12 +18,12 @@ const ScoreFilter = props => {
         >
           <Bar dataKey="frequency">
             {histogram.map((entry, index) => (
-              <Cell fill={scale(entry.label)} key={`cell-${index}`} />
+              <Cell fill={colorScale(entry.label)} key={`cell-${index}`} />
             ))}
           </Bar>
         </BarChart>
       </ResponsiveContainer>
-      <SliderBar />
+      <SliderBar scoresRange={scoresRange} handleChange={handleChange} />
     </div>
   );
 };

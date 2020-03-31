@@ -6,7 +6,6 @@ import "../css/entityContainer.css";
 const EntityContainer = ({ data, onClickEntity, selectedEntity }) => {
   const entities = aggregateByEntity(data);
   const scale = initNaturalBreak(entities);
-  // console.log(selectedEntity);
 
   return (
     <div className="entity-container">

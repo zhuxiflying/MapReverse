@@ -12,7 +12,7 @@ import { aggregateBymonth, tickFormatter } from "../utils/dataUtils";
 import "../css/timeBarChart.css";
 
 const TimeBarChart = props => {
-  const { data, selectedBar, onClickBar, scale } = props;
+  const { data, selectedBar, onClickBar, colorScale } = props;
   const maxBarWidth = 100;
   const aggregation = aggregateBymonth(data);
 
@@ -42,7 +42,7 @@ const TimeBarChart = props => {
             {aggregation.map((entry, index) => (
               <Cell
                 cursor="pointer"
-                fill={scale(entry.score)}
+                fill={colorScale(entry.score)}
                 stroke={entry.date === selectedBar ? "#8884d8" : null}
                 strokeWidth="4"
                 key={`cell-${index}`}

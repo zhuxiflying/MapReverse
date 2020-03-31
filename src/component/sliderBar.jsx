@@ -2,33 +2,23 @@ import React from "react";
 import { Slider, Rail, Handles, Tracks } from "react-compound-slider";
 import { Handle } from "./handle";
 import { Track } from "./track";
+import "../css/sliderBar.css";
 
-const SliderBar = () => {
-  const sliderStyle = {
-    // Give the slider some width
-    position: "relative",
-    width: "100%",
-    height: "20%"
-  };
-
-  const railStyle = {
-    position: "absolute",
-    width: "100%",
-    height: 10,
-    borderRadius: 5,
-    backgroundColor: "#dcdcdc"
-  };
+const SliderBar = props => {
+  const { scoresRange, handleChange } = props;
+  console.log(scoresRange);
 
   return (
     <Slider
-      rootStyle={sliderStyle}
+      className="silder"
       domain={[0, 100]}
       step={1}
       mode={2}
-      values={[0, 100]}
+      values={scoresRange}
+      onChange={handleChange}
     >
       <Rail>
-        {({ getRailProps }) => <div style={railStyle} {...getRailProps()} />}
+        {({ getRailProps }) => <div className="rail" {...getRailProps()} />}
       </Rail>
       <Handles>
         {({ handles, getHandleProps }) => (
