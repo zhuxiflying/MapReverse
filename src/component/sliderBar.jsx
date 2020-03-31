@@ -1,7 +1,7 @@
 import React from "react";
 import { Slider, Rail, Handles, Tracks } from "react-compound-slider";
-import { Handle } from "./handle";
-import { Track } from "./track";
+import { Handle } from "./slider/handle";
+import { Track } from "./slider/track";
 import "../css/sliderBar.css";
 
 const SliderBar = props => {
@@ -10,11 +10,11 @@ const SliderBar = props => {
   return (
     <Slider
       className="silder"
+      values={scoresRange}
+      onChange={handleChange}
       domain={[0, 100]}
       step={1}
       mode={2}
-      values={scoresRange}
-      onChange={handleChange}
     >
       <Rail>
         {({ getRailProps }) => <div className="rail" {...getRailProps()} />}

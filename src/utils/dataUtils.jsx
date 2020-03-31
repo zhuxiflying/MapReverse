@@ -1,6 +1,7 @@
 import { scaleQuantile, scaleThreshold } from "d3-scale";
 import { ckmeans } from "simple-statistics";
 
+//count the frequency of entities
 export function aggregateByEntity(data) {
   let entities = {};
   let entityList = [];
@@ -59,6 +60,7 @@ export function aggregateBymonth(data) {
   return aggregation;
 }
 
+//aggregate scores into histogram
 export function scoreHistogram(data) {
   const interval = 2;
   const barNum = 50;

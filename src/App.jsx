@@ -83,7 +83,7 @@ class App extends Component {
         <MapIconContainer
           key="iconContainer"
           data={filtered3}
-          scale={quantileScale}
+          colorScale={quantileScale}
         />
 
         <ScoreFilter
