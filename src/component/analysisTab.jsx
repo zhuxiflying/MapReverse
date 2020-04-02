@@ -5,7 +5,13 @@ import "react-tabs/style/react-tabs.css";
 import "../css/analysisTab.css";
 import DomainTable from "./domainTable";
 
-const AnalysisTab = ({ data, onClickEntity, selectedEntity }) => {
+const AnalysisTab = ({
+  data,
+  onClickEntity,
+  onCheckDomain,
+  selectedEntity,
+  selectedDomain
+}) => {
   return (
     <Tabs className="analysisTab-container">
       <TabList>
@@ -21,7 +27,12 @@ const AnalysisTab = ({ data, onClickEntity, selectedEntity }) => {
         />
       </TabPanel>
       <TabPanel>
-        <DomainTable key="domainContainer" data={data} />
+        <DomainTable
+          key="domainContainer"
+          data={data}
+          selectedDomain={selectedDomain}
+          onCheckDomain={onCheckDomain}
+        />
       </TabPanel>
     </Tabs>
   );

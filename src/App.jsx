@@ -13,6 +13,7 @@ class App extends Component {
     data: [],
     selectedBar: "",
     selectedEntity: null,
+    selectedDomain: null,
     scoresRange: [0, 100]
   };
 
@@ -29,6 +30,11 @@ class App extends Component {
   handleEntityClick = entity => {
     const selectedEntity = entity === this.state.selectedEntity ? null : entity;
     this.setState({ selectedEntity });
+  };
+
+  handleDomainOnCheck = domain => {
+    const selectedDomain = domain === this.state.selectedDomain ? null : domain;
+    this.setState({ selectedDomain });
   };
 
   handleSilderChange = scoresRange => {
@@ -62,7 +68,13 @@ class App extends Component {
   };
 
   render() {
-    const { data, scoresRange, selectedBar, selectedEntity } = this.state;
+    const {
+      data,
+      scoresRange,
+      selectedBar,
+      selectedEntity,
+      selectedDomain
+    } = this.state;
 
     //filter data by date;
     const filtered =
@@ -87,6 +99,7 @@ class App extends Component {
             data={filtered2}
             colorScale={quantileScale}
             selectedEntity={selectedEntity}
+            selectedDomain={selectedDomain}
           />
         </div>
         <div className="scoreFilter">
@@ -113,6 +126,8 @@ class App extends Component {
             data={filtered2}
             selectedEntity={selectedEntity}
             onClickEntity={this.handleEntityClick}
+            onCheckDomain={this.handleDomainOnCheck}
+            selectedDomain={selectedDomain}
           />
         </div>
       </div>

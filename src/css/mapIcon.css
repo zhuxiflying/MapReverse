@@ -11,12 +11,18 @@
   padding: 1px;
   border-width: 2px;
   border-style: solid;
-  border-color: #8884d8;
+  /* border-color: #8884d8;
+   */
+  border-color: red;
   transform: scale(1.1);
 }
 
 .icon-div:hover {
   transform: scale(1.1);
+  cursor: pointer;
+}
+
+.icon-div-selected:hover {
   cursor: pointer;
 }
 

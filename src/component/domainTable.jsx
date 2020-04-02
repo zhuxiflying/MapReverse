@@ -32,7 +32,7 @@ class DomainTable extends Component {
   };
 
   render() {
-    const { data } = this.props;
+    const { data, onCheckDomain, selectedDomain } = this.props;
     const { sortColumn } = this.state;
 
     const domains = aggregateByDomain(data);
@@ -62,7 +62,11 @@ class DomainTable extends Component {
           {sorted.map(domain => (
             <tr key={domain.key}>
               <td>
-                <input type="checkbox" />
+                <input
+                  type="checkbox"
+                  onChange={() => onCheckDomain(domain.key)}
+                  checked={domain.key === selectedDomain}
+                />
               </td>
               <td>{domain.key}</td>
               <td>{domain.frequency}</td>
