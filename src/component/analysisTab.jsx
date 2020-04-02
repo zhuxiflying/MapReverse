@@ -3,6 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import EntityContainer from "./entityContainer";
 import "react-tabs/style/react-tabs.css";
 import "../css/analysisTab.css";
+import DomainTable from "./domainTable";
 
 const AnalysisTab = ({ data, onClickEntity, selectedEntity }) => {
   return (
@@ -20,12 +21,7 @@ const AnalysisTab = ({ data, onClickEntity, selectedEntity }) => {
         />
       </TabPanel>
       <TabPanel>
-        <EntityContainer
-          key="entityContainer"
-          data={data}
-          selectedEntity={selectedEntity}
-          onClickEntity={onClickEntity}
-        />
+        <DomainTable key="domainContainer" data={data} />
       </TabPanel>
     </Tabs>
   );

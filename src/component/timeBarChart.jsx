@@ -8,13 +8,13 @@ import {
   ResponsiveContainer
 } from "recharts";
 
-import { aggregateBymonth, tickFormatter } from "../utils/dataUtils";
+import { aggregateByMonth, tickFormatter } from "../utils/dataUtils";
 import "../css/timeBarChart.css";
 
 const TimeBarChart = props => {
   const { data, selectedBar, onClickBar, colorScale } = props;
   const maxBarWidth = 100;
-  const aggregation = aggregateBymonth(data);
+  const aggregation = aggregateByMonth(data);
 
   return (
     <div className="timeChart-container">

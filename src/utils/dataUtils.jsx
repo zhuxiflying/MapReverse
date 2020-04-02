@@ -32,8 +32,37 @@ export function aggregateByEntity(data) {
   return entityList;
 }
 
+//count the frequency of the domains
+export function aggregateByDomain(data) {
+  let domainCount = {};
+  let domains = [];
+
+  data.forEach(element => {
+    const { Domain, Crawl_Date } = element;
+    const date = new Date(Crawl_Date);
+    if (!domainCount[Domain]) {
+      domainCount[Domain] = [];
+      domainCount[Domain][0] = date;
+      domainCount[Domain][1] = 1;
+    } else {
+      if (date < domainCount[Domain][0]) {
+        domainCount[Domain][0] = date;
+      }
+      domainCount[Domain][1]++;
+    }
+  });
+
+  domains = Object.entries(domainCount).map(([key, value]) => ({
+    key,
+    frequency: value[1],
+    date: toDateString(value[0])
+  }));
+
+  return domains;
+}
+
 // aggregte data by crawl date with monthly intervals
-export function aggregateBymonth(data) {
+export function aggregateByMonth(data) {
   let monthCount = {};
   let aggregation = [];
 
@@ -103,6 +132,14 @@ export function getKeyfromDate(dateStr) {
   const date = new Date(dateStr),
     month = date.getMonth() + 1;
   return date.getFullYear() + "-" + month;
+}
+
+//extract the year and month fields as the key for a date
+export function toDateString(date) {
+  const year = date.getFullYear(),
+    month = date.getMonth() + 1,
+    day = date.getDate();
+  return year + "-" + month + "-" + day;
 }
 
 //initial color scale
