@@ -1,8 +1,18 @@
 .icon-div {
   height: 80px;
-  border-bottom-width: 5px;
-  border-bottom-style: solid;
-  border-bottom-color: #dc143c;
+  padding: 1px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #cccccc;
+}
+
+.icon-div-selected {
+  height: 80px;
+  padding: 1px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #8884d8;
+  transform: scale(1.1);
 }
 
 .icon-div:hover {
@@ -13,4 +23,9 @@
 .icon-img {
   max-width: 100%;
   max-height: 100%;
+}
+
+.scoreBar {
+  height: 5px;
+  width: 100%;
 }

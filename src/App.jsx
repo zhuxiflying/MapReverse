@@ -12,7 +12,7 @@ class App extends Component {
   state = {
     data: [],
     selectedBar: "",
-    selectedEntity: "",
+    selectedEntity: null,
     scoresRange: [0, 100]
   };
 
@@ -27,7 +27,7 @@ class App extends Component {
   };
 
   handleEntityClick = entity => {
-    const selectedEntity = entity === this.state.selectedEntity ? "" : entity;
+    const selectedEntity = entity === this.state.selectedEntity ? null : entity;
     this.setState({ selectedEntity });
   };
 
@@ -71,11 +71,11 @@ class App extends Component {
     //filter data by score range;
     const filtered2 = this.filterDataByScore(filtered, scoresRange);
 
-    //filter data by entity;
-    const filtered3 =
-      selectedEntity === ""
-        ? filtered2
-        : this.filterDataByEntity(filtered2, selectedEntity);
+    // //filter data by entity;
+    // const filtered3 =
+    //   selectedEntity === ""
+    //     ? filtered2
+    //     : this.filterDataByEntity(filtered2, selectedEntity);
 
     const quantileScale = initQuantileScale(data);
 
@@ -84,8 +84,9 @@ class App extends Component {
         <div className="mapContainer">
           <MapIconContainer
             key="iconContainer"
-            data={filtered3}
+            data={filtered2}
             colorScale={quantileScale}
+            selectedEntity={selectedEntity}
           />
         </div>
         <div className="scoreFilter">
