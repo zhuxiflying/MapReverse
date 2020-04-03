@@ -11,8 +11,6 @@
   padding: 1px;
   border-width: 2px;
   border-style: solid;
-  /* border-color: #8884d8;
-   */
   border-color: red;
   transform: scale(1.1);
 }
@@ -20,6 +18,14 @@
 .icon-div:hover {
   transform: scale(1.1);
   cursor: pointer;
+}
+
+.icon-div-focus {
+  outline: none;
+  border-width: 2px;
+  border-color: #8884d8;
+  border-style: solid;
+  box-shadow: 0 0 8px #8884d8;
 }
 
 .icon-div-selected:hover {

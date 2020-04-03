@@ -26,6 +26,19 @@ body {
   border-style: solid;
 }
 
+.imageContainer {
+  /*position*/
+  grid-column-start: 6;
+  grid-column-end: 11;
+  grid-row-start: 1;
+  grid-row-end: 7;
+
+  /*border style*/
+  border-color: #ccc;
+  border-width: 1px;
+  border-style: solid;
+}
+
 .timeChart {
   /*position*/
   grid-column-start: 1;

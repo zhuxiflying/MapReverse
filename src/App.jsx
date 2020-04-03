@@ -7,10 +7,12 @@ import { initQuantileScale, getKeyfromDate } from "./utils/dataUtils";
 import "./css/app.css";
 import ScoreFilter from "./component/scoreFilter";
 import AnalysisTab from "./component/analysisTab";
+import ImagePanel from "./component/imagePanel";
 
 class App extends Component {
   state = {
     data: [],
+    selectedImage: null,
     selectedBar: "",
     selectedEntity: null,
     selectedDomain: null,
@@ -21,6 +23,11 @@ class App extends Component {
     const { data } = await axios.get("data/test20/matches.json");
     this.setState({ data: data, filtered: data });
   }
+
+  handleIconClick = icon => {
+    const selectedImage = this.state.selectedImage === icon ? null : icon;
+    this.setState({ selectedImage });
+  };
 
   handleBarClick = bar => {
     const selectedBar = this.state.selectedBar === bar.date ? "" : bar.date;
@@ -71,6 +78,7 @@ class App extends Component {
     const {
       data,
       scoresRange,
+      selectedImage,
       selectedBar,
       selectedEntity,
       selectedDomain
@@ -83,12 +91,6 @@ class App extends Component {
     //filter data by score range;
     const filtered2 = this.filterDataByScore(filtered, scoresRange);
 
-    // //filter data by entity;
-    // const filtered3 =
-    //   selectedEntity === ""
-    //     ? filtered2
-    //     : this.filterDataByEntity(filtered2, selectedEntity);
-
     const quantileScale = initQuantileScale(data);
 
     return (
@@ -98,9 +100,16 @@ class App extends Component {
             key="iconContainer"
             data={filtered2}
             colorScale={quantileScale}
+            selectedImage={selectedImage}
             selectedEntity={selectedEntity}
             selectedDomain={selectedDomain}
+            onClickIcon={this.handleIconClick}
           />
+        </div>
+        <div className="imageContainer">
+          {selectedImage !== null && (
+            <ImagePanel selectedImage={selectedImage} />
+          )}
         </div>
         <div className="scoreFilter">
           <ScoreFilter
