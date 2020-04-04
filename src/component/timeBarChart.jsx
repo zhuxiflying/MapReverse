@@ -19,20 +19,17 @@ const TimeBarChart = props => {
   return (
     <div className="timeChart-container">
       <ResponsiveContainer height="100%" width="100%">
-        <BarChart data={aggregation}>
+        <BarChart
+          data={aggregation}
+          margin={{ top: 10, right: 0, bottom: 0, left: 0 }}
+        >
           <XAxis
             dataKey="date"
             axisLine={false}
             tickFormatter={tickFormatter}
+            stroke="black"
           />
-          <YAxis
-            label={{
-              value: "Timeline",
-              angle: -90,
-              fontSize: 20,
-              position: "insideLeft"
-            }}
-          />
+          <YAxis stroke="black" tick={{ fontSize: "1rem" }} />
           <Bar
             dataKey="frequency"
             stackId="a"
