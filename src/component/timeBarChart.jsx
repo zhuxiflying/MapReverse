@@ -7,26 +7,25 @@ import {
   Cell,
   ResponsiveContainer
 } from "recharts";
-
-import { aggregateByMonth, tickFormatter } from "../utils/dataUtils";
+import CustomizedAxisTick from "./axisTick";
+import { aggregateByMonth } from "../utils/dataUtils";
 import "../css/timeBarChart.css";
 
 const TimeBarChart = props => {
   const { data, selectedBar, onClickBar, colorScale } = props;
   const maxBarWidth = 100;
   const aggregation = aggregateByMonth(data);
-
   return (
     <div className="timeChart-container">
       <ResponsiveContainer height="100%" width="100%">
         <BarChart
           data={aggregation}
-          margin={{ top: 10, right: 0, bottom: 0, left: 0 }}
+          margin={{ top: 10, right: 10, bottom: 30, left: 0 }}
         >
           <XAxis
             dataKey="date"
             axisLine={false}
-            tickFormatter={tickFormatter}
+            tick={<CustomizedAxisTick />}
             stroke="black"
           />
           <YAxis stroke="black" tick={{ fontSize: "1rem" }} />

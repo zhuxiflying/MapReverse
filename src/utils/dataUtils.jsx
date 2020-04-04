@@ -61,11 +61,12 @@ export function aggregateByDomain(data) {
   return domains;
 }
 
-// aggregte data by crawl date with monthly intervals
+// aggregte data by crawl date with monthly intervals and sorted order
 export function aggregateByMonth(data) {
   let monthCount = {};
   let aggregation = [];
 
+  data = sortByDate(data);
   data.forEach(element => {
     const { Crawl_Date, Score } = element;
     const key = getKeyfromDate(Crawl_Date);
@@ -117,6 +118,20 @@ export function scoreHistogram(data) {
   }));
 
   return histogramChart;
+}
+
+export function sortByFrequency(data) {
+  return data.sort((domain1, domain2) => {
+    return domain2.frequency - domain1.frequency;
+  });
+}
+
+export function sortByDate(data) {
+  return data.sort((element1, element2) => {
+    const date1 = new Date(element1.Crawl_Date),
+      date2 = new Date(element2.Crawl_Date);
+    return date1 - date2;
+  });
 }
 
 //format tick label, only return month for date that is not in Jananary
