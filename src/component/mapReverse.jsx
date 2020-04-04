@@ -78,7 +78,6 @@ class MapReverse extends Component {
   };
 
   render() {
-    console.log(this.props.mapId);
     const {
       data,
       scoresRange,
@@ -87,6 +86,8 @@ class MapReverse extends Component {
       selectedEntity,
       selectedDomain
     } = this.state;
+
+    const { onClickBack } = this.props;
 
     //filter data by date;
     const filtered =
@@ -108,6 +109,7 @@ class MapReverse extends Component {
             selectedEntity={selectedEntity}
             selectedDomain={selectedDomain}
             onClickIcon={this.handleIconClick}
+            onClickBack={onClickBack}
           />
         </div>
         <div className="imageContainer">

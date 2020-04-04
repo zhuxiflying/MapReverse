@@ -42,3 +42,12 @@
   height: 5px;
   width: 100%;
 }
+
+.back-icon {
+  height: 80px;
+}
+
+.back-icon:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}

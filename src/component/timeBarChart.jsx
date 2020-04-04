@@ -20,7 +20,7 @@ const TimeBarChart = props => {
       <ResponsiveContainer height="100%" width="100%">
         <BarChart
           data={aggregation}
-          margin={{ top: 10, right: 10, bottom: 30, left: 0 }}
+          margin={{ top: 10, right: 10, bottom: 10, left: 0 }}
         >
           <XAxis
             dataKey="date"

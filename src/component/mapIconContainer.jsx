@@ -1,4 +1,5 @@
 import React from "react";
+import BackIcon from "./backIcon";
 import MapIcon from "./mapIcon";
 import "../css/mapContainer.css";
 
@@ -8,10 +9,12 @@ const mapIconContainer = ({
   selectedImage,
   selectedEntity,
   selectedDomain,
-  onClickIcon
+  onClickIcon,
+  onClickBack
 }) => {
   return (
     <div className="icon-container">
+      <BackIcon onClickBack={onClickBack} />
       {data.map(match => {
         return (
           <MapIcon

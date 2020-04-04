@@ -12,8 +12,8 @@ class CustomizedAxisTick extends PureComponent {
           y={0}
           dy={16}
           className="small"
-          textAnchor="end"
-          transform="rotate(-35)"
+          textAnchor="middle"
+          //   transform="rotate(-35)"
         >
           {payload.value}
         </text>

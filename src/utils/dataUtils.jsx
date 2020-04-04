@@ -62,11 +62,11 @@ export function aggregateByDomain(data) {
 }
 
 // aggregte data by crawl date with monthly intervals and sorted order
-export function aggregateByMonth(data) {
+export function aggregateByMonth(input) {
   let monthCount = {};
   let aggregation = [];
-
-  data = sortByDate(data);
+  let data = [...input];
+  sortByDate(data);
   data.forEach(element => {
     const { Crawl_Date, Score } = element;
     const key = getKeyfromDate(Crawl_Date);
