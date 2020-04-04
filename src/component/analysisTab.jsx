@@ -9,6 +9,7 @@ const AnalysisTab = ({
   data,
   onClickEntity,
   onCheckDomain,
+  selectedImage,
   selectedEntity,
   selectedDomain
 }) => {
@@ -22,6 +23,7 @@ const AnalysisTab = ({
         <EntityContainer
           key="entityContainer"
           data={data}
+          selectedImage={selectedImage}
           selectedEntity={selectedEntity}
           onClickEntity={onClickEntity}
         />

@@ -3,8 +3,17 @@ import { aggregateByEntity, initNaturalBreak } from "../utils/dataUtils";
 import Entity from "./entity";
 import "../css/entityContainer.css";
 
-const EntityContainer = ({ data, onClickEntity, selectedEntity }) => {
+const EntityContainer = ({
+  data,
+  onClickEntity,
+  selectedImage,
+  selectedEntity
+}) => {
   const entities = aggregateByEntity(data);
+  const focusedEntities =
+    selectedImage === null || selectedImage.entity === null
+      ? []
+      : Object.keys(selectedImage.entity);
   const scale = initNaturalBreak(entities);
 
   return (
@@ -16,6 +25,7 @@ const EntityContainer = ({ data, onClickEntity, selectedEntity }) => {
           scale={scale}
           onClickEntity={onClickEntity}
           selected={selectedEntity === entity.key}
+          focused={focusedEntities.includes(entity.key)}
         />
       ))}
     </div>

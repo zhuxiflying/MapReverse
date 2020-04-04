@@ -1,17 +1,23 @@
 import React from "react";
 import "../css/entity.css";
 
-const Entity = ({ entity, scale, onClickEntity, selected }) => {
+const Entity = ({ entity, scale, onClickEntity, selected, focused }) => {
   const { key, frequency } = entity;
-  let borderStyle = "3px solid";
-  if (selected) borderStyle += "#8884d8";
+
+  let styleClass = "entity-div";
+  if (selected) {
+    styleClass += " entity-div-selected";
+  } else if (focused) {
+    styleClass += " entity-div-focused";
+  }
+
   const style = {
-    backgroundColor: scale(frequency),
-    border: borderStyle
+    backgroundColor: scale(frequency)
   };
+
   return (
     <div
-      className="entity-div"
+      className={styleClass}
       style={style}
       onClick={() => onClickEntity(key)}
     >

@@ -108,7 +108,10 @@ class App extends Component {
         </div>
         <div className="imageContainer">
           {selectedImage !== null && (
-            <ImagePanel selectedImage={selectedImage} />
+            <ImagePanel
+              selectedImage={selectedImage}
+              colorScale={quantileScale}
+            />
           )}
         </div>
         <div className="scoreFilter">
@@ -133,6 +136,7 @@ class App extends Component {
           <AnalysisTab
             key="analysisTab"
             data={filtered2}
+            selectedImage={selectedImage}
             selectedEntity={selectedEntity}
             onClickEntity={this.handleEntityClick}
             onCheckDomain={this.handleDomainOnCheck}

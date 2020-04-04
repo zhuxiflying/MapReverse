@@ -5,6 +5,17 @@
   color: #f7f7f7;
   padding: 5px;
   margin: 2px;
+  border-width: 3px;
+  border-style: solid;
+}
+
+.entity-div-focused {
+  border-color: #e31a1c;
+}
+
+.entity-div-selected {
+  border-color: #8884d8;
+  /* box-shadow: 0 0 8px #8884d8; */
 }
 
 .entity-div:hover {

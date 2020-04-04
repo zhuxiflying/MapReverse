@@ -138,7 +138,7 @@ export function getKeyfromDate(dateStr) {
 export function toDateString(date) {
   const year = date.getFullYear(),
     month = date.getMonth() + 1,
-    day = date.getDate();
+    day = date.getDate() + 1;
   return year + "-" + month + "-" + day;
 }
 
@@ -155,7 +155,9 @@ export function initQuantileScale(data) {
 //initial color scale
 export function initNaturalBreak(data) {
   if (data.length === 0) return null;
-  const range = ["#fecc5c", "#fd8d3c", "#f03b20", "#bd0026"];
+  const range = ["#fed976", "#feb24c", "#fd8d3c", "#fc4e2a"];
+  // const range = ["#6baed6", "#4292c6", "#2171b5", "#084594"];
+
   const domain = data.map(item => item.frequency);
   //implment jenks natural breaks by ckmeans, #clusters = #thresholds +1;
   const domainClass = ckmeans(domain, range.length);
