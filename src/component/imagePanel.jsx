@@ -1,36 +1,26 @@
 import React from "react";
+import Image from "./image";
+import ImageInfo from "./imageInfo";
 import "../css/infoContainer.css";
 
-const ImagePanel = ({ selectedImage, colorScale }) => {
-  const {
-    OriginImage: imageUrl,
-    Score,
-    Crawl_Date,
-    Link,
-    Domain
-  } = selectedImage;
-  const url =
-    imageUrl === undefined ? "data\\noImage.png" : "data\\" + imageUrl;
+const ImagePanel = ({ selectedImage, colorScale, mapId }) => {
+  let url = null;
+  if (selectedImage === null) {
+    url = "data\\" + mapId + "\\" + mapId + ".jpg";
+  } else {
+    const { OriginImage: imageUrl } = selectedImage;
+    url = imageUrl === undefined ? "data\\noImage.png" : "data\\" + imageUrl;
+  }
+
   return (
     <div className="info-container">
-      <div className="originImage">
-        <img className="origin-img" src={url} alt="" />
-      </div>
+      <Image url={url} />
       <div className="textPanel">
-        <p>
-          The original image was first found on <b>{Crawl_Date}</b> at{" "}
-          <a href={Link} target="_blank" rel="noopener noreferrer">
-            {Domain}
-          </a>{" "}
-          .
-        </p>
-        <p>
-          The similarity score is{" "}
-          <span style={{ color: colorScale(Score), fontWeight: "bold" }}>
-            {Score}
-          </span>
-          .
-        </p>
+        {selectedImage === null ? (
+          <p>This is the input image.</p>
+        ) : (
+          <ImageInfo selectedImage={selectedImage} colorScale={colorScale} />
+        )}
       </div>
     </div>
   );

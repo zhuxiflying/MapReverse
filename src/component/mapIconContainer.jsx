@@ -2,19 +2,23 @@ import React from "react";
 import BackIcon from "./backIcon";
 import MapIcon from "./mapIcon";
 import "../css/mapContainer.css";
+import OriginIcon from "./originIcon";
 
 const mapIconContainer = ({
   data,
+  mapId,
   colorScale,
   selectedImage,
   selectedEntity,
   selectedDomain,
   onClickIcon,
-  onClickBack
+  onClickBack,
+  onClickOrigin
 }) => {
   return (
     <div className="icon-container">
       <BackIcon onClickBack={onClickBack} />
+      <OriginIcon onClickOrigin={onClickOrigin} mapId={mapId} />
       {data.map(match => {
         return (
           <MapIcon

@@ -32,6 +32,10 @@ class MapReverse extends Component {
     this.setState({ selectedImage });
   };
 
+  handleOriginClick = () => {
+    this.setState({ selectedImage: null });
+  };
+
   handleBarClick = bar => {
     const selectedBar = this.state.selectedBar === bar.date ? "" : bar.date;
     this.setState({ selectedBar });
@@ -80,6 +84,7 @@ class MapReverse extends Component {
   render() {
     const {
       data,
+      mapId,
       scoresRange,
       selectedImage,
       selectedBar,
@@ -104,21 +109,22 @@ class MapReverse extends Component {
           <MapIconContainer
             key="iconContainer"
             data={filtered2}
+            mapId={mapId}
             colorScale={quantileScale}
             selectedImage={selectedImage}
             selectedEntity={selectedEntity}
             selectedDomain={selectedDomain}
             onClickIcon={this.handleIconClick}
+            onClickOrigin={this.handleOriginClick}
             onClickBack={onClickBack}
           />
         </div>
         <div className="imageContainer">
-          {selectedImage !== null && (
-            <ImagePanel
-              selectedImage={selectedImage}
-              colorScale={quantileScale}
-            />
-          )}
+          <ImagePanel
+            selectedImage={selectedImage}
+            colorScale={quantileScale}
+            mapId={mapId}
+          />
         </div>
         <div className="scoreFilter">
           <ScoreFilter

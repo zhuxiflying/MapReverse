@@ -3,7 +3,11 @@ import React, { Component } from "react";
 class MapGallery extends Component {
   state = {};
   render() {
-    return <h1>Hello World</h1>;
+    return (
+      <div className="grid-container">
+        <div className="log-container"> </div>
+      </div>
+    );
   }
 }
 

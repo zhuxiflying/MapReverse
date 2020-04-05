@@ -3,7 +3,7 @@ import MapReverse from "./component/mapReverse";
 import MapGallery from "./component/mapGallery";
 
 class App extends Component {
-  state = { mapId: "test15" };
+  state = { mapId: "test20" };
 
   handleBackClick = () => {
     this.setState({ mapId: null });
