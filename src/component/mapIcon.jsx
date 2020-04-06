@@ -7,7 +7,7 @@ const MapIcon = ({
   selectedImage,
   selectedEntity,
   selectedDomain,
-  onClickIcon
+  onClickIcon,
 }) => {
   const { entity, Domain } = data;
   const entityKeys = entity === null ? [] : Object.keys(entity);
@@ -20,7 +20,11 @@ const MapIcon = ({
 
   return (
     <div className={style} onClick={() => onClickIcon(data)}>
-      <img className="icon-img" src={"data\\" + data.Image_url} alt="" />
+      <img
+        className="icon-img"
+        src={"data\\" + data.Image_url + ".jpg"}
+        alt=""
+      />
     </div>
   );
 };

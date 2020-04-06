@@ -9,12 +9,14 @@ const ImagePanel = ({ selectedImage, colorScale, mapId }) => {
     url = "data\\" + mapId + "\\" + mapId + ".jpg";
   } else {
     const { OriginImage: imageUrl } = selectedImage;
-    url = imageUrl === undefined ? "data\\noImage.png" : "data\\" + imageUrl;
+    url = imageUrl === undefined ? "data\\noImage.jpg" : "data\\" + imageUrl;
   }
 
   return (
     <div className="info-container">
-      <Image url={url} />
+      <div className="originImage">
+        <Image url={url} />
+      </div>
       <div className="textPanel">
         {selectedImage === null ? (
           <p>This is the input image.</p>

@@ -10,7 +10,7 @@ const ScoreHistogram = props => {
       <BarChart
         data={histogram}
         barCategoryGap={1}
-        margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
+        margin={{ top: 10, right: 0, bottom: 0, left: 0 }}
       >
         <Bar dataKey="frequency">
           {histogram.map((entry, index) => (

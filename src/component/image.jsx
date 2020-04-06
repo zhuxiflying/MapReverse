@@ -1,11 +1,7 @@
 import React from "react";
 
 const Image = ({ url }) => {
-  return (
-    <div className="originImage">
-      <img className="origin-img" src={url} alt="" />
-    </div>
-  );
+  return <img className="origin-img" src={url} alt="" />;
 };
 
 export default Image;
