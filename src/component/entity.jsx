@@ -4,16 +4,14 @@ import "../css/entity.css";
 const Entity = ({ entity, scale, onClickEntity, selected, focused }) => {
   const { key, frequency } = entity;
 
+  const style = {
+    borderColor: focused ? "#e31a1c" : scale(frequency),
+  };
+
   let styleClass = "entity-div";
   if (selected) {
     styleClass += " entity-div-selected";
-  } else if (focused) {
-    styleClass += " entity-div-focused";
   }
-
-  const style = {
-    backgroundColor: scale(frequency)
-  };
 
   return (
     <div

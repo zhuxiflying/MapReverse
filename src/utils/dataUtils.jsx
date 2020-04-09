@@ -7,7 +7,7 @@ export function aggregateByEntity(data) {
   let entityList = [];
 
   //summarize the frequency by entity names
-  data.forEach(element => {
+  data.forEach((element) => {
     const { entity } = element;
     if (entity !== null) {
       Object.entries(entity).forEach(([key, value]) => {
@@ -24,7 +24,7 @@ export function aggregateByEntity(data) {
   //transform a entity object to an array
   entityList = Object.entries(entities).map(([key, value]) => ({
     key: key,
-    frequency: value
+    frequency: value,
   }));
 
   //sort the entity with frequency
@@ -37,7 +37,7 @@ export function aggregateByDomain(data) {
   let domainCount = {};
   let domains = [];
 
-  data.forEach(element => {
+  data.forEach((element) => {
     const { Domain, Crawl_Date } = element;
     const date = new Date(Crawl_Date);
     if (!domainCount[Domain]) {
@@ -55,7 +55,7 @@ export function aggregateByDomain(data) {
   domains = Object.entries(domainCount).map(([key, value]) => ({
     key,
     frequency: value[1],
-    date: toDateString(value[0])
+    date: toDateString(value[0]),
   }));
 
   return domains;
@@ -67,7 +67,7 @@ export function aggregateByMonth(input) {
   let aggregation = [];
   let data = [...input];
   sortByDate(data);
-  data.forEach(element => {
+  data.forEach((element) => {
     const { Crawl_Date, Score } = element;
     const key = getKeyfromDate(Crawl_Date);
     //use object as hash map, the value cantains frequency and total scores;
@@ -84,7 +84,7 @@ export function aggregateByMonth(input) {
   aggregation = Object.entries(monthCount).map(([key, value]) => ({
     date: key,
     frequency: value[0],
-    score: value[1] / value[0]
+    score: value[1] / value[0],
   }));
 
   return aggregation;
@@ -102,7 +102,7 @@ export function scoreHistogram(data) {
 
   let histogram = {};
   let histogramChart = [];
-  data.forEach(element => {
+  data.forEach((element) => {
     const { Score } = element;
     const key = Math.ceil(Score / interval);
     if (!histogram[key]) {
@@ -112,9 +112,9 @@ export function scoreHistogram(data) {
     }
   });
 
-  histogramChart = foo.map(element => ({
+  histogramChart = foo.map((element) => ({
     label: element * interval,
-    frequency: histogram[element] || 0
+    frequency: histogram[element] || 0,
   }));
 
   return histogramChart;
@@ -159,31 +159,28 @@ export function toDateString(date) {
 
 //initial color scale
 export function initQuantileScale(data) {
-  const domain = data.map(item => item.Score).sort((a, b) => a - b);
+  const domain = data.map((item) => item.Score).sort((a, b) => a - b);
   const range = ["#feebe2", "#fbb4b9", "#f768a1", "#ae017e"];
-  const quantileScale = scaleQuantile()
-    .domain(domain)
-    .range(range);
+  const quantileScale = scaleQuantile().domain(domain).range(range);
   return quantileScale;
 }
 
 //initial color scale
 export function initNaturalBreak(data) {
   if (data.length === 0) return null;
-  const range = ["#fed976", "#feb24c", "#fd8d3c", "#fc4e2a"];
+  // const range = ["#fed976", "#feb24c", "#fd8d3c", "#fc4e2a"];
+  const range = ["#bdc9e1", "#67a9cf", "#1c9099", "#016c59"];
   // const range = ["#6baed6", "#4292c6", "#2171b5", "#084594"];
 
-  const domain = data.map(item => item.frequency);
+  const domain = data.map((item) => item.frequency);
   //implment jenks natural breaks by ckmeans, #clusters = #thresholds +1;
   const domainClass = ckmeans(domain, range.length);
   const thresholds = domainClass
-    .map(element => {
+    .map((element) => {
       return Math.max(...element);
     })
     .slice(0, -1);
 
-  const scale = scaleThreshold()
-    .domain(thresholds)
-    .range(range);
+  const scale = scaleThreshold().domain(thresholds).range(range);
   return scale;
 }

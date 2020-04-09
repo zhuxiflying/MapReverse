@@ -5,18 +5,18 @@ import {
   XAxis,
   YAxis,
   Cell,
-  ResponsiveContainer
+  ResponsiveContainer,
 } from "recharts";
 import CustomizedAxisTick from "./axisTick";
 import { aggregateByMonth } from "../utils/dataUtils";
 import "../css/timeBarChart.css";
 
-const TimeBarChart = props => {
-  const { data, selectedBar, onClickBar, colorScale } = props;
+const TimeBarChart = (props) => {
+  const { data, selectedBar, onClickBar, handleReset, colorScale } = props;
   const maxBarWidth = 100;
   const aggregation = aggregateByMonth(data);
   return (
-    <div className="timeChart-container">
+    <div className="timeChart-container" onDoubleClick={handleReset}>
       <ResponsiveContainer height="100%" width="100%">
         <BarChart
           data={aggregation}

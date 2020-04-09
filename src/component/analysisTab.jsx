@@ -9,9 +9,10 @@ const AnalysisTab = ({
   data,
   onClickEntity,
   onCheckDomain,
+  handleReset,
   selectedImage,
   selectedEntity,
-  selectedDomain
+  selectedDomain,
 }) => {
   return (
     <Tabs className="analysisTab-container">
@@ -26,6 +27,7 @@ const AnalysisTab = ({
           selectedImage={selectedImage}
           selectedEntity={selectedEntity}
           onClickEntity={onClickEntity}
+          handleReset={handleReset}
         />
       </TabPanel>
       <TabPanel>

@@ -6,8 +6,9 @@ import "../css/entityContainer.css";
 const EntityContainer = ({
   data,
   onClickEntity,
+  handleReset,
   selectedImage,
-  selectedEntity
+  selectedEntity,
 }) => {
   const entities = aggregateByEntity(data);
   const focusedEntities =
@@ -17,8 +18,8 @@ const EntityContainer = ({
   const scale = initNaturalBreak(entities);
 
   return (
-    <div className="entity-container">
-      {entities.map(entity => (
+    <div className="entity-container" onDoubleClick={handleReset}>
+      {entities.map((entity) => (
         <Entity
           key={entity.key}
           entity={entity}

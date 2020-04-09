@@ -17,7 +17,7 @@ class MapReverse extends Component {
     selectedBar: "",
     selectedEntity: null,
     selectedDomain: null,
-    scoresRange: [0, 100]
+    scoresRange: [0, 100],
   };
 
   async componentDidMount() {
@@ -27,7 +27,7 @@ class MapReverse extends Component {
     this.setState({ data: data, filtered: data });
   }
 
-  handleIconClick = icon => {
+  handleIconClick = (icon) => {
     const selectedImage = this.state.selectedImage === icon ? null : icon;
     this.setState({ selectedImage });
   };
@@ -36,27 +36,43 @@ class MapReverse extends Component {
     this.setState({ selectedImage: null });
   };
 
-  handleBarClick = bar => {
+  handleBarClick = (bar) => {
     const selectedBar = this.state.selectedBar === bar.date ? "" : bar.date;
     this.setState({ selectedBar });
   };
 
-  handleEntityClick = entity => {
+  handleEntityClick = (entity) => {
     const selectedEntity = entity === this.state.selectedEntity ? null : entity;
     this.setState({ selectedEntity });
   };
 
-  handleDomainOnCheck = domain => {
+  handleDomainOnCheck = (domain) => {
     const selectedDomain = domain === this.state.selectedDomain ? null : domain;
     this.setState({ selectedDomain });
   };
 
-  handleSilderChange = scoresRange => {
+  handleSilderChange = (scoresRange) => {
     this.setState({ scoresRange });
   };
 
+  handleScoreFilterReset = () => {
+    this.setState({ scoresRange: [0, 100] });
+  };
+
+  handleTimeBarReset = () => {
+    this.setState({ selectedBar: "" });
+  };
+
+  handleSelectionReset = () => {
+    console.log("entity selection");
+    this.setState({
+      selectedEntity: null,
+      selectedDomain: null,
+    });
+  };
+
   filterDataByDate = (maps, barDate) => {
-    const filtered = maps.filter(element => {
+    const filtered = maps.filter((element) => {
       const { Crawl_Date } = element;
       const key = getKeyfromDate(Crawl_Date);
       return key === barDate;
@@ -65,7 +81,7 @@ class MapReverse extends Component {
   };
 
   filterDataByEntity = (maps, entity) => {
-    const filtered = maps.filter(element => {
+    const filtered = maps.filter((element) => {
       const entities = element.entity;
       const entityKeys = entities === null ? [] : Object.keys(entities);
       return entityKeys.includes(entity);
@@ -74,7 +90,7 @@ class MapReverse extends Component {
   };
 
   filterDataByScore = (maps, scoresRange) => {
-    const filtered = maps.filter(element => {
+    const filtered = maps.filter((element) => {
       const score = element.Score;
       return score >= scoresRange[0] && score <= scoresRange[1];
     });
@@ -89,7 +105,7 @@ class MapReverse extends Component {
       selectedImage,
       selectedBar,
       selectedEntity,
-      selectedDomain
+      selectedDomain,
     } = this.state;
 
     const { onClickBack } = this.props;
@@ -133,6 +149,7 @@ class MapReverse extends Component {
             scoresRange={scoresRange}
             colorScale={quantileScale}
             handleChange={this.handleSilderChange}
+            handleReset={this.handleScoreFilterReset}
           />
         </div>
         <div className="timeChart">
@@ -142,6 +159,7 @@ class MapReverse extends Component {
             selectedBar={selectedBar}
             colorScale={quantileScale}
             onClickBar={this.handleBarClick}
+            handleReset={this.handleTimeBarReset}
           />
         </div>
         <div className="analysisTab">
@@ -152,6 +170,7 @@ class MapReverse extends Component {
             selectedEntity={selectedEntity}
             onClickEntity={this.handleEntityClick}
             onCheckDomain={this.handleDomainOnCheck}
+            handleReset={this.handleSelectionReset}
             selectedDomain={selectedDomain}
           />
         </div>

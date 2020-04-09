@@ -19,8 +19,9 @@
     "simple-statistics": "^7.0.8"
   },
   "scripts": {
-    "start": "react-scripts start",
     "build": "react-scripts build",
+    "devstart": "react-scripts start",
+    "start": "node server.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
